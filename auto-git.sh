@@ -23,6 +23,7 @@ function switch_branch() {
 }
 
 function merge() {
+    echo "Matheus"
     selected=$(git branch | fzf +m \
         --height 100% \
         --layout reverse \
