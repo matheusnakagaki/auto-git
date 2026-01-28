@@ -23,7 +23,6 @@ function switch_branch() {
 }
 
 function merge() {
-    echo "Matheus"
     selected=$(git branch | fzf +m \
         --height 100% \
         --layout reverse \
@@ -38,4 +37,19 @@ function merge() {
     git merge "$selected"
 }
 
-merge
+function delete_branch() {
+    selected=$(git branch | fzf +m \
+        --height 40% \
+        --layout reverse \
+        --border \
+        --preview 'git -c color.ui=always log --oneline $(echo {} | tr -d "* ")' \
+        --color bg:#222222,preview-bg:#333333)
+
+    exit_exception
+
+    selected=$(echo $selected | tr -d "* ")
+
+    git branch -d "$selected"
+}
+
+delete_branch
